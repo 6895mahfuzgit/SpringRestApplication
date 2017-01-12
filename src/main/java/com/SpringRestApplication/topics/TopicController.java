@@ -1,9 +1,8 @@
 package com.SpringRestApplication.topics;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +25,12 @@ public class TopicController {
     @RequestMapping("/topics/{id}")
     public Topic getTopicById(@PathVariable("id") String name) {
         return topicService.getTopicById(name);
+    }
+
+    @RequestMapping(value = "/topics", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void addTopics(@RequestBody Topic topic) {
+        topicService.addTopic(topic);
     }
 
 
