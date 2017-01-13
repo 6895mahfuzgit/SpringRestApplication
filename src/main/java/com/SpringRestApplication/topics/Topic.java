@@ -1,10 +1,16 @@
 package com.SpringRestApplication.topics;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
+
 /**
  * Created by user on 12-Jan-17.
  */
-public class Topic {
+@Entity
+public class Topic implements Serializable {
 
+    @Id
     private String Id;
     private String name;
     private String description;

@@ -1,5 +1,6 @@
 package com.SpringRestApplication.topics;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,10 @@ import java.util.List;
 public class TopicService {
 
 
+    @Autowired
+    private TopicRepository topicRepository;
+
+
     List<Topic> topicList = new ArrayList<>(Arrays.asList(
             new Topic("Spring", "Spring Framework", "Spring Framework Description"),
             new Topic("Java", "Core Java", "Core Java Description"),
@@ -20,41 +25,30 @@ public class TopicService {
             new Topic("C#", "Core C#", "Core C# Description")));
 
     public List<Topic> getAllTopics() {
-        return topicList;
 
+        return (List<Topic>) topicRepository.findAll();
     }
 
     public Topic getTopicById(String name) {
-        return topicList.stream().filter(t -> t.getId().equals(name)).findFirst().get();
 
+        return topicRepository.findOne(name);
     }
 
     public void addTopic(Topic topic) {
 
-        topicList.add(topic);
+        topicRepository.save(topic);
+
     }
 
-    public void updateTopicById(String name, Topic topic) {
+    public void updateTopicById(Topic topic) {
 
-        for (int i = 0; i < topicList.size(); i++) {
-
-            Topic topicc = topicList.get(i);
-
-            if (topicc.getId().equals(name)) {
-
-                topicList.set(i, topic);
-
-            }
-
-
-        }
-
+        topicRepository.save(topic);
     }
 
     public void deleteTopicById(String name) {
 
 
-        topicList.removeIf(t -> t.getId().equals(name));
+        topicRepository.delete(name);
 
     }
 }
