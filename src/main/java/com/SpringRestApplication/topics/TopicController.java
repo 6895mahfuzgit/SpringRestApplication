@@ -34,4 +34,11 @@ public class TopicController {
     }
 
 
+    @RequestMapping(value = "/topics/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void updateTopicById(@PathVariable("id") String name, @RequestBody Topic topic) {
+        topicService.updateTopicById(name, topic);
+    }
+
+
 }
